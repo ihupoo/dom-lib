@@ -1,24 +1,24 @@
-import canUseDOM from './canUseDOM';
+import canUseDOM from './canUseDOM'
 
-const vendorMap = {
-  animation: 'animationend',
-  OAnimation: 'oAnimationEnd',
-  MozAnimation: 'animationend',
-  WebkitAnimation: 'webkitAnimationEnd'
-};
-
-function getAnimationEnd() {
-  if (!canUseDOM) {
-    return;
-  }
-
-  let tempAnimationEnd;
-  const style = document.createElement('div').style;
-  for (tempAnimationEnd in vendorMap) {
-    if (style[tempAnimationEnd] !== undefined) {
-      return vendorMap[tempAnimationEnd];
-    }
-  }
+const vendorMap: { [key: string]: string } = {
+	animation: 'animationend',
+	OAnimation: 'oAnimationEnd',
+	MozAnimation: 'animationend',
+	WebkitAnimation: 'webkitAnimationEnd',
 }
 
-export default getAnimationEnd;
+function getAnimationEnd() {
+	if (!canUseDOM) {
+		return
+	}
+
+	let tempAnimationEnd
+	const style = document.createElement('div').style
+	for (tempAnimationEnd in vendorMap) {
+		if (style[tempAnimationEnd as unknown as keyof CSSStyleDeclaration] !== undefined) {
+			return vendorMap[tempAnimationEnd]
+		}
+	}
+}
+
+export default getAnimationEnd

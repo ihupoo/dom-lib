@@ -1,8 +1,3 @@
-bin
-build
-lib
-tools
+dist
 node_modules
-coverage
-/.git
-karma.conf.js
+*.html

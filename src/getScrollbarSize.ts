@@ -1,24 +1,26 @@
-import canUseDOM from './canUseDOM';
+import canUseDOM from './canUseDOM'
 
-let size;
+let size: number
 
-export default (recalc?: boolean): number | void => {
-  if (size === undefined || recalc) {
-    if (canUseDOM) {
-      const scrollDiv = document.createElement('div');
-      const body: any = document.body;
+const getScrollbarSize = (recalc?: boolean): number | undefined => {
+	if (size === undefined || recalc) {
+		if (canUseDOM) {
+			const scrollDiv = document.createElement('div')
+			const body: any = document.body
 
-      scrollDiv.style.position = 'absolute';
-      scrollDiv.style.top = '-9999px';
-      scrollDiv.style.width = '50px';
-      scrollDiv.style.height = '50px';
-      scrollDiv.style.overflow = 'scroll';
+			scrollDiv.style.position = 'absolute'
+			scrollDiv.style.top = '-9999px'
+			scrollDiv.style.width = '50px'
+			scrollDiv.style.height = '50px'
+			scrollDiv.style.overflow = 'scroll'
 
-      body.appendChild(scrollDiv);
-      size = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-      body.removeChild(scrollDiv);
-    }
-  }
+			body.appendChild(scrollDiv)
+			size = scrollDiv.offsetWidth - scrollDiv.clientWidth
+			body.removeChild(scrollDiv)
+		}
+	}
 
-  return size;
-};
+	return size
+}
+
+export default getScrollbarSize

@@ -1,4 +1,4 @@
-const hyphenPattern = /-(.)/g;
+const hyphenPattern = /-(.)/g
 
 /**
  * Camelcases a hyphenated string, for example:
@@ -9,8 +9,8 @@ const hyphenPattern = /-(.)/g;
  * @param {string} string
  * @return {string}
  */
-function camelize(string) {
-  return string.replace(hyphenPattern, (_, character) => character.toUpperCase());
+function camelize(string: string) {
+	return string.replace(hyphenPattern, (_, character) => character.toUpperCase())
 }
 
-export default camelize;
+export default camelize

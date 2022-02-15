@@ -1,5 +1,5 @@
 export interface CustomEventListener<T = any> {
-  (evt: T): void;
+	(evt: T): void
 }
 
 /**
@@ -7,10 +7,10 @@ export interface CustomEventListener<T = any> {
  */
 
 export default function on<K extends keyof DocumentEventMap>(
-  target: Element | Window | Document | EventTarget,
-  eventName: K,
-  listener: EventListenerOrEventListenerObject | CustomEventListener,
-  options: boolean | AddEventListenerOptions = false
+	target: Element | Window | Document | EventTarget,
+	eventName: K,
+	listener: EventListenerOrEventListenerObject | CustomEventListener,
+	options: boolean | AddEventListenerOptions = false
 ): void {
-  target.removeEventListener(eventName, listener, options);
+	target.removeEventListener(eventName, listener, options)
 }

@@ -1,5 +1,7 @@
-import { camelize } from './stringFormatter';
+import { camelize } from './stringFormatter'
 
-const msPattern = /^ms-/;
+const msPattern = /^ms-/
 
-export default (name: string) => camelize(name.replace(msPattern, 'ms-'));
+const camelizeStyleName = (name: string) => camelize(name.replace(msPattern, 'ms-'))
+
+export default camelizeStyleName

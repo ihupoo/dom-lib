@@ -1,19 +1,19 @@
-import canUseDOM from '../canUseDOM';
-import { camelize } from './stringFormatter';
+import canUseDOM from '../canUseDOM'
+import { camelize } from './stringFormatter'
 
-const memoized = {};
-const prefixes = ['Webkit', 'ms', 'Moz', 'O'];
-const prefixRegex = new RegExp(`^(${prefixes.join('|')})`);
-const testStyle = canUseDOM ? document.createElement('div').style : {};
+const memoized: { [key: string]: any } = {}
+const prefixes = ['Webkit', 'ms', 'Moz', 'O']
+const prefixRegex = new RegExp(`^(${prefixes.join('|')})`)
+const testStyle = canUseDOM ? document.createElement('div').style : {}
 
-function getWithPrefix(name) {
-  for (let i = 0; i < prefixes.length; i += 1) {
-    const prefixedName = prefixes[i] + name;
-    if (prefixedName in testStyle) {
-      return prefixedName;
-    }
-  }
-  return null;
+function getWithPrefix(name: string) {
+	for (let i = 0; i < prefixes.length; i += 1) {
+		const prefixedName = prefixes[i] + name
+		if (prefixedName in testStyle) {
+			return prefixedName
+		}
+	}
+	return null
 }
 
 /**
@@ -22,18 +22,18 @@ function getWithPrefix(name) {
  * supported.
  */
 function getVendorPrefixedName(property: string) {
-  const name = camelize(property);
-  if (memoized[name] === undefined) {
-    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
-    if (prefixRegex.test(capitalizedName)) {
-      throw new Error(
-        `getVendorPrefixedName must only be called with unprefixed
+	const name = camelize(property)
+	if (memoized[name] === undefined) {
+		const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
+		if (prefixRegex.test(capitalizedName)) {
+			throw new Error(
+				`getVendorPrefixedName must only be called with unprefixed
           CSS property names. It was called with ${property}`
-      );
-    }
-    memoized[name] = name in testStyle ? name : getWithPrefix(capitalizedName);
-  }
-  return memoized[name] || name;
+			)
+		}
+		memoized[name] = name in testStyle ? name : getWithPrefix(capitalizedName)
+	}
+	return memoized[name] || name
 }
 
-export default getVendorPrefixedName;
+export default getVendorPrefixedName

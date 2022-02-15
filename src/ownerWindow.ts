@@ -1,6 +1,8 @@
-import ownerDocument from './ownerDocument';
+import ownerDocument from './ownerDocument'
 
-export default (componentOrElement: Element): Window => {
-  const doc = ownerDocument(componentOrElement);
-  return doc.defaultView;
-};
+const getWindow = (componentOrElement: Element): Window | null => {
+	const doc = ownerDocument(componentOrElement)
+	return doc.defaultView
+}
+
+export default getWindow

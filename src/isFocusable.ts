@@ -1,15 +1,11 @@
 const selector = `input:not([type='hidden']):not([disabled]), 
 select:not([disabled]), textarea:not([disabled]), a[href], 
 button:not([disabled]),[tabindex],iframe,object, embed, area[href], 
-audio[controls],video[controls],[contenteditable]:not([contenteditable='false'])`;
+audio[controls],video[controls],[contenteditable]:not([contenteditable='false'])`
 
 function isVisible(element: Element) {
-  const htmlElement = element as HTMLElement;
-  return (
-    htmlElement.offsetWidth > 0 ||
-    htmlElement.offsetHeight > 0 ||
-    element.getClientRects().length > 0
-  );
+	const htmlElement = element as HTMLElement
+	return htmlElement.offsetWidth > 0 || htmlElement.offsetHeight > 0 || element.getClientRects().length > 0
 }
 
 /**
@@ -21,7 +17,7 @@ function isVisible(element: Element) {
  * isFocusable(document.querySelector("input:disabled")); // false
  */
 function isFocusable(element: Element): boolean {
-  return isVisible(element) && element?.matches(selector);
+	return isVisible(element) && element?.matches(selector)
 }
 
-export default isFocusable;
+export default isFocusable

@@ -1,51 +1,51 @@
-import canUseDOM from './canUseDOM';
+import canUseDOM from './canUseDOM'
 
 function getTransitionProperties() {
-  if (!canUseDOM) {
-    return {};
-  }
+	if (!canUseDOM) {
+		return {}
+	}
 
-  const vendorMap = {
-    O: e => `o${e.toLowerCase()}`,
-    Moz: e => e.toLowerCase(),
-    Webkit: e => `webkit${e}`,
-    ms: e => `MS${e}`
-  };
+	const vendorMap: { [key: string]: (e: string) => string } = {
+		O: (e: string) => `o${e.toLowerCase()}`,
+		Moz: (e: string) => e.toLowerCase(),
+		Webkit: (e: string) => `webkit${e}`,
+		ms: (e: string) => `MS${e}`,
+	}
 
-  const vendors = Object.keys(vendorMap);
+	const vendors = Object.keys(vendorMap)
 
-  let style = document.createElement('div').style;
+	let style: null | CSSStyleDeclaration = document.createElement('div').style
 
-  let tempTransitionEnd;
-  let tempPrefix = '';
+	let tempTransitionEnd
+	let tempPrefix = ''
 
-  for (let i = 0; i < vendors.length; i += 1) {
-    const vendor = vendors[i];
+	for (let i = 0; i < vendors.length; i += 1) {
+		const vendor = vendors[i]
 
-    if (`${vendor}TransitionProperty` in style) {
-      tempPrefix = `-${vendor.toLowerCase()}`;
-      tempTransitionEnd = vendorMap[vendor]('TransitionEnd');
-      break;
-    }
-  }
+		if (`${vendor}TransitionProperty` in style) {
+			tempPrefix = `-${vendor.toLowerCase()}`
+			tempTransitionEnd = vendorMap[vendor]('TransitionEnd')
+			break
+		}
+	}
 
-  if (!tempTransitionEnd && 'transitionProperty' in style) {
-    tempTransitionEnd = 'transitionend';
-  }
+	if (!tempTransitionEnd && 'transitionProperty' in style) {
+		tempTransitionEnd = 'transitionend'
+	}
 
-  style = null;
+	style = null
 
-  const addPrefix = (name: string) => `${tempPrefix}-${name}`;
+	const addPrefix = (name: string) => `${tempPrefix}-${name}`
 
-  return {
-    end: tempTransitionEnd,
-    backfaceVisibility: addPrefix('backface-visibility'),
-    transform: addPrefix('transform'),
-    property: addPrefix('transition-property'),
-    timing: addPrefix('transition-timing-function'),
-    delay: addPrefix('transition-delay'),
-    duration: addPrefix('transition-duration')
-  };
+	return {
+		end: tempTransitionEnd,
+		backfaceVisibility: addPrefix('backface-visibility'),
+		transform: addPrefix('transform'),
+		property: addPrefix('transition-property'),
+		timing: addPrefix('transition-timing-function'),
+		delay: addPrefix('transition-delay'),
+		duration: addPrefix('transition-duration'),
+	}
 }
 
-export default getTransitionProperties;
+export default getTransitionProperties

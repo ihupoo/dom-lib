@@ -1,5 +1,5 @@
-import getTransitionProperties from './getTransitionProperties';
+import getTransitionProperties from './getTransitionProperties'
 
 export default function getTransitionEnd() {
-  return getTransitionProperties().end;
+	return getTransitionProperties().end
 }

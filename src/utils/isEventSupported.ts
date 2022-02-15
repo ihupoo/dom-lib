@@ -1,35 +1,35 @@
-import canUseDOM from '../canUseDOM';
+import canUseDOM from '../canUseDOM'
 
-let useHasFeature;
+let useHasFeature: boolean
 if (canUseDOM) {
-  useHasFeature =
-    document.implementation &&
-    document.implementation.hasFeature &&
-    // always returns true in newer browsers as per the standard.
-    // @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
-    document.implementation.hasFeature('', '') !== true;
+	useHasFeature =
+		document.implementation &&
+		document.implementation.hasFeature &&
+		// always returns true in newer browsers as per the standard.
+		// @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
+		document.implementation.hasFeature('', '') !== true
 }
 
 function isEventSupported(eventNameSuffix: string, capture?: boolean) {
-  if (!canUseDOM || (capture && !('addEventListener' in document))) {
-    return false;
-  }
+	if (!canUseDOM || (capture && !('addEventListener' in document))) {
+		return false
+	}
 
-  const eventName = `on${eventNameSuffix}`;
-  let isSupported = eventName in document;
+	const eventName = `on${eventNameSuffix}`
+	let isSupported = eventName in document
 
-  if (!isSupported) {
-    const element = document.createElement('div');
-    element.setAttribute(eventName, 'return;');
-    isSupported = typeof element[eventName] === 'function';
-  }
+	if (!isSupported) {
+		const element = document.createElement('div')
+		element.setAttribute(eventName, 'return;')
+		isSupported = typeof element[eventName as unknown as keyof HTMLDivElement] === 'function'
+	}
 
-  if (!isSupported && useHasFeature && eventNameSuffix === 'wheel') {
-    // This is the only way to test support for the `wheel` event in IE9+.
-    isSupported = document.implementation.hasFeature('Events.wheel', '3.0');
-  }
+	if (!isSupported && useHasFeature && eventNameSuffix === 'wheel') {
+		// This is the only way to test support for the `wheel` event in IE9+.
+		isSupported = document.implementation.hasFeature('Events.wheel', '3.0')
+	}
 
-  return isSupported;
+	return isSupported
 }
 
-export default isEventSupported;
+export default isEventSupported

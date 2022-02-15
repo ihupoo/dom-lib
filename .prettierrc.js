@@ -1,7 +1,9 @@
+// https://prettier.io/docs/en/options.html
 module.exports = {
-  printWidth: 100,
-  tabWidth: 2,
-  singleQuote: true,
-  arrowParens: 'avoid',
-  trailingComma: 'none'
-};
+	tabWidth: 4,
+	printWidth: 120,
+	useTabs: true,
+	semi: false,
+	singleQuote: true,
+	endOfLine: 'lf'
+}

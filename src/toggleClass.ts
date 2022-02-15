@@ -1,10 +1,12 @@
-import hasClass from './hasClass';
-import addClass from './addClass';
-import removeClass from './removeClass';
+import hasClass from './hasClass'
+import addClass from './addClass'
+import removeClass from './removeClass'
 
-export default (target: Element, className: string): Element => {
-  if (hasClass(target, className)) {
-    return removeClass(target, className);
-  }
-  return addClass(target, className);
-};
+const toggleClass = (target: Element, className: string): Element => {
+	if (hasClass(target, className)) {
+		return removeClass(target, className)
+	}
+	return addClass(target, className)
+}
+
+export default toggleClass

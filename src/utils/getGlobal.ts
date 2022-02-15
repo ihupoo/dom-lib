@@ -4,18 +4,20 @@
 
 // https://github.com/tc39/proposal-global
 function getGlobal() {
-  if (typeof globalThis !== 'undefined') {
-    return globalThis;
-  }
+	if (typeof globalThis !== 'undefined') {
+		return globalThis
+	}
 
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
+	// eslint-disable-next-line no-restricted-globals
+	if (typeof self !== 'undefined') {
+		// eslint-disable-next-line no-restricted-globals
+		return self
+	}
+	if (typeof window !== 'undefined') {
+		return window
+	}
 
-  throw new Error('unable to locate global object');
+	throw new Error('unable to locate global object')
 }
 
-export default getGlobal;
+export default getGlobal
